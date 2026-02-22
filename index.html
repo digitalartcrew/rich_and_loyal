@@ -188,20 +188,25 @@
       overflow: hidden;
     }
     .hero-bg {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; z-index: 1;
       background:
-        radial-gradient(ellipse at 75% 40%, rgba(196,30,58,.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(212,175,55,.07) 0%, transparent 50%),
-        var(--black);
+        radial-gradient(ellipse at 75% 40%, rgba(196,30,58,.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(212,175,55,.06) 0%, transparent 50%);
     }
     .hero-bg-gradient {
-      position: absolute; inset: 0;
+      position: absolute; inset: 0; z-index: 1;
       background:
-        linear-gradient(to top, var(--black) 0%, rgba(5,5,5,.5) 55%, rgba(5,5,5,.05) 100%),
-        linear-gradient(to right, rgba(5,5,5,.95) 0%, rgba(5,5,5,.6) 45%, transparent 70%);
+        linear-gradient(to top, rgba(5,5,5,.96) 0%, rgba(5,5,5,.7) 55%, rgba(5,5,5,.5) 100%),
+        linear-gradient(to right, rgba(5,5,5,.92) 0%, rgba(5,5,5,.6) 50%, rgba(5,5,5,.25) 100%);
     }
 
     /* ─── Hero Visual — R&L logo focal point ───────────────── */
+    .hero-city-photo {
+      position: absolute; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 40%;
+      filter: sepia(20%) brightness(0.85) saturate(1.2) contrast(1.05);
+    }
     .hero-visual {
       position: absolute;
       right: 0; top: 0; bottom: 0;
@@ -212,16 +217,6 @@
       justify-content: center;
       padding: 5.5rem 3rem 5.5rem 0;
     }
-    /* left fade so logo blends into hero text side */
-    .hero-visual::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 180px;
-      background: linear-gradient(to right, var(--black) 0%, transparent 100%);
-      z-index: 3;
-      pointer-events: none;
-    }
     .hero-logo-display {
       position: relative;
       z-index: 4;
@@ -230,26 +225,14 @@
       justify-content: center;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      border-radius: 10px;
     }
-    .hero-city-photo {
+    .hero-logo-glow {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 60%;
-      filter: sepia(25%) brightness(1.15) saturate(1.3) contrast(1.05);
-    }
-    .hero-city-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(212,144,32,.12) 0%,
-        rgba(5,5,5,.35) 100%
-      );
+      width: clamp(300px, 38vw, 560px);
+      aspect-ratio: 1;
+      background: radial-gradient(ellipse, rgba(185,115,10,.9) 0%, rgba(100,60,5,.45) 52%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
     }
     .hero-logo-img {
       position: relative;
@@ -257,9 +240,12 @@
       width: clamp(260px, 30vw, 440px);
       height: auto;
       display: block;
-      mix-blend-mode: multiply;
       pointer-events: none;
-      filter: drop-shadow(0 0 30px rgba(212,175,55,.4));
+      mix-blend-mode: multiply;
+      filter:
+        drop-shadow(0 0 50px rgba(212,175,55,.55))
+        drop-shadow(0 0 100px rgba(212,175,55,.25))
+        drop-shadow(0 8px 32px rgba(0,0,0,.9));
     }
     @media (max-width: 1024px) {
       .hero-visual { width: 42%; }
@@ -1007,6 +993,7 @@
      HERO
 ═══════════════════════════════════════════════════════════ -->
 <section id="hero">
+  <img class="hero-city-photo" src="https://angiemcmonigal.com/wp-content/uploads/2018/08/waiting-for-the-storm-2400.jpg" alt="New York City skyline" />
   <div class="hero-accent-line"></div>
   <div class="hero-bg"></div>
   <div class="hero-bg-gradient"></div>
@@ -1042,8 +1029,7 @@
   <!-- R&L Logo — right side focal point -->
   <div class="hero-visual">
     <div class="hero-logo-display">
-      <img class="hero-city-photo" src="https://angiemcmonigal.com/wp-content/uploads/2018/08/waiting-for-the-storm-2400.jpg" alt="New York City skyline" />
-      <div class="hero-city-overlay"></div>
+      <div class="hero-logo-glow"></div>
       <img class="hero-logo-img" src="img/rich.PNG" alt="Rich &amp; Loyal" />
     </div>
   </div>
